@@ -4,27 +4,21 @@ def ComprobarArray(Array,Base):
     if Array[i]>BaseD:
       return False
   return True
+  
 def PasarArray(string):
   Array=[0,]*len(string)
   for i in range(len(string)):
     try:
       Array[i]=int(string[i])
     except ValueError:
-      if string[i] == "A" or string[i] == "a":
-        Array[i]=10
-      elif string[i] == "B" or string[i] == "b":
-        Array[i]=11
-      elif string[i] == "C" or string[i] == "c":
-        Array[i]=12
-      elif string[i] == "D" or string[i] == "d":
-        Array[i]=13
-      elif string[i] == "E" or string[i] == "e":
-        Array[i]=14
-      elif string[i] == "F" or string[i] == "f":
-        Array[i]=15
+      if ord(string[i])>64 and ord(string[i])<91:
+        Array[i]=ord(string[i])-55
+      elif ord(string[i])>96 and ord(string[i])<123:
+        Array[i]=ord(string[i])-87
       else:
-        Array[i]=16
+        Array[i]=100
   return Array
+  
 def ConvertirDecimal(Base,ArrayNumero):
   Numero=0
   for i in range(len(ArrayNumero)):
@@ -40,46 +34,32 @@ def Decimal_Base(Numero,Base):
       break
   Array=Array[::-1]
   return Array
+  
 def Mostrar_Resultados(ArrayF):
   print ("El el numero convertido es ", end="")
   for i in range(len(ArrayF)):
-    if ArrayF[i] == 10:
-      ArrayF[i]="A"
-    if ArrayF[i] == 11:
-      ArrayF[i]="B"
-    if ArrayF[i] == 12:
-      ArrayF[i]="C"
-    if ArrayF[i] == 13:
-      ArrayF[i]="D"
-    if ArrayF[i] == 14:
-      ArrayF[i]="E"
-    if ArrayF[i] == 15:
-      ArrayF[i]="F"
     if ArrayF[i]!=0 or i!=0:
+      if ArrayF[i]>9:
+        ArrayF[i]=chr(ArrayF[i]+55)
       print(ArrayF[i], end="")
     
 
 while True:
-
   BaseM=int(input("Ingrese base inicial: "))
-  
   if BaseM>16 or BaseM<2:
     print("La base que colocaste no esta entre 2 y 16")
   else:
     break
 
 while True:
-
   Numero=str(input("Ingrese numero en la base inicial: "))
   Lista=PasarArray(Numero)
-
   if ComprobarArray(Lista,BaseM)==False:
     print("El numero no pertenece la base")
   else:
     break
 
 while True:
-
   BaseN=int(input("Ingresa la base de cambio: "))
   if BaseM>16 or BaseM<2:
     print("La base que colocaste no esta entre 2 y 16")
